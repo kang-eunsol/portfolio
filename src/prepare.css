@@ -1,0 +1,36 @@
+/* 웹폰트
+MuseoModerno:
+    https://fonts.google.com/specimen/MuseoModerno?selected=Material+Symbols+Outlined:menu:FILL@0;wght@400;GRAD@0;opsz@24&icon.size=30&icon.color=%231f1f1f&icon.platform=web&preview.layout=grid&preview.script=Latn
+SUSE:
+    https://fonts.google.com/specimen/SUSE?selected=Material+Symbols+Outlined:menu:FILL@0;wght@400;GRAD@0;opsz@24&icon.size=30&icon.color=%231f1f1f&icon.platform=web&preview.layout=grid&preview.script=Latn
+*/
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=SUSE:ital,wght@0,100..900;1,100..900&display=swap');
+@font-face {
+    font-family: nanum-square-round;
+    src: local('nanum-square-round'),
+        url('/fonts/NanumSquareRoundOTFR.otf') format('opentype');
+}
+
+/* 보더라인 포함 사이징 */
+* {
+    box-sizing: border-box;
+}
+
+/* root 정의 */
+html{
+    /* rem이용 */
+    font-size: 16px;
+    --color_prpl: #9a34eb;
+    --color_orange: #ef7051;
+    --color_yellow: #fbbf33;
+    --museo: "MuseoModerno", sansserif;
+    --suse: "SUSE", sansserif;
+    --nanum: 'nanum-square-round', sans-serif;
+    --z-dstnc: 710px;
+}
+
+/* a태그 스타일 초기화 */
+a:link, a:visited{
+    text-decoration: none;
+    color: white;
+}

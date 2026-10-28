@@ -1,0 +1,64 @@
+.works_details {
+
+    & > .works_details_wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    
+        & > .works_details_ttl {
+            display: flex;
+            height: 100%;
+            /* justify-content: space-between; */
+        
+            & > h1 {
+                color: white;
+                font-family: var(--museo);
+                margin: 0;
+                flex-grow: 1;
+            }
+            & > .open_new,
+            & > .arrow_back {
+                padding-block-start: 10px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    & #works_details_content {
+        font-family: var(--nanum);
+        flex-grow: 1;
+        height: 100%;
+    }
+}
+
+.work_details_common {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    row-gap: 10px;
+
+    & h1 {
+        color: white;
+        margin: 0;
+        align-self: center;
+    }
+    & > .works_details_img_wrap {
+        flex-grow: 1;
+        height: 70%;
+        display: flex;
+        justify-content: center;
+        
+        & > img {
+            /* width: 100%; */
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+#content_dialog {
+    scrollbar-width: thin;
+}
+
+#dialog_content > img {
+    width: 100%;
+}

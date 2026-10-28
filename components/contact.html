@@ -1,0 +1,70 @@
+<div id="contact" class="contact window_bg">
+
+    <div class="contact_ttl_objt_wrap">
+        <h1 class="contact_title">Contact</h1>
+        <img class="contact_objt" src="/media/objt_tilt.svg"/>
+    </div>
+
+    <form id="f_contact">
+        <input type="hidden" name="host" value="sol915.popol.website" />
+        <input type="hidden" name="receiver" value="kk_1290@naver.com" />
+
+        <div class="contact_col1">
+            <div>
+                <label>NAME</label>
+                <input type="text" name="username" maxlength="50" size="50" required />
+            </div>
+            <div>
+                <label>E-MAIL</label>
+                <input type="email" name="sender" maxlength="50" size="50" required />
+            </div>
+            <div>
+                <label>SUBJECT</label>
+                <input type="text" name="email_subject" maxlength="50" size="50" required />
+            </div>
+            <div>
+                <label>MESSAGE</label>
+                <textarea name="email_content" rows="5" required></textarea>
+            </div>
+        </div>
+
+        <div class="contact_col2">
+            <div>
+                <img id="captcha" src="https://popol.website/apis/captcha/captcha.php">
+                <button class="button_refsh" type="button" id="re_captcha">새로고침</button>
+                <input class="button_cpch_fld" type="text" name="captcha" maxlength="50" placeholder="문자를 입력하세요." required>
+            </div>
+            <button class="button_sbmt" type="submit">SUBMIT
+
+                <svg width="42" height="22" id="contact_sbmt_objt" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 124 74.06">
+                    <defs>
+                        <style>
+                        .cnttst0 {fill: #000000;}
+                        </style>
+                    </defs>
+                    <polygon class="cnttst0" points="99.12 49.37 123.81 49.37 124 74.06 99.31 74.06 99.12 49.37"/>
+                    <polygon class="cnttst0" points="49.75 49.37 74.43 49.37 74.62 74.06 49.94 74.06 49.75 49.37"/>
+                    <polygon class="cnttst0" points="74.25 24.69 98.93 24.69 99.12 49.37 74.43 49.37 74.25 24.69"/>
+                    <polygon class="cnttst0" points="98.74 0 123.43 0 123.62 24.69 98.93 24.69 98.74 0"/>
+                    <polygon class="cnttst0" points="49.37 0 74.06 0 74.25 24.69 49.56 24.69 49.37 0"/>
+                    <polygon class="cnttst0" points="0 0 24.69 0 24.87 24.69 .19 24.69 0 0"/>
+                    <polygon class="cnttst0" points="24.87 24.69 49.56 24.69 49.75 49.37 25.06 49.37 24.87 24.69"/>
+                </svg>
+
+            </button>
+            
+            
+
+        </div>
+
+        <div class="contact_col3">
+            <p>
+                KANG EUNSOL<br/>
+                kk_1290@naver.com
+            </p>
+            <p>
+                @kangeunsol 2026
+            </p>
+        </div>
+    </form>
+</div>

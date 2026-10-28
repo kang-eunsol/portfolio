@@ -1,0 +1,963 @@
+/********************************************
+공통
+*/
+body {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background-image: url("/media/2k_stars_milky_way_edit.jpg");
+    overflow: hidden;
+
+    & > .main-wrap {
+        pointer-events: none;
+        position: absolute;
+        width: 0;
+        height: 0;
+        inset-inline-start: 50%;
+        inset-block-start: 15%;
+        transform-style: preserve-3d;
+        perspective: 2000px;
+
+        transform: translateX(100vw);
+        transition: left 0.8s ease-in-out, right 0.8s ease-in-out;
+
+        @media screen and (max-width: 1000px) {
+            inset-block-start: 25%;
+        }
+
+/* planet,page */
+        & > .main {
+            position:absolute;
+            width: 80vw;
+            height: 500px;
+            left: 50%;
+            transform: translateX(-50%) translateZ(-600px) rotateX(-5deg);
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            transform-box: fill-box;
+            transform-origin: center center;
+            
+            /* 좁은 화면 planet, page 시점 조절 */
+            @media screen and (max-width: 500px) {
+                transform: translateX(-50%) translateZ(-500px) rotateX(-2deg);
+            }
+    
+            /* page */
+            & > div {
+                position: absolute;
+                inset-inline: 3vw;
+                inset-block: 0px;
+
+                /* 넓은 화면 page 시점 조절(크기제한) */
+                @media screen and (min-width: 1440px) {
+                    inset-inline: 10vw;
+                    max-width: 800px;
+                    margin-inline: auto;
+                }
+
+                &:not(:last-child) {
+                    backdrop-filter: blur(5px);
+                    padding: 45px;
+                    border-radius: 70px;
+                    background: rgb(0 0 0 / 0.3);
+
+                    @media screen and (max-width: 1000px) {
+                        display: flex;
+                        flex-direction: column;
+                        height: 500px;
+                        padding: 30px;
+                        border-radius: 30px;
+                    }
+                }
+
+                &:nth-child(1) {
+                    transform: rotateY(0deg) translateZ(var(--z-dstnc));
+
+                    @media screen and (max-width: 1000px) {
+                        transform: rotateY(0deg) translateZ(500px);
+                    }
+                }
+                &:nth-child(2) {
+                    transform: rotateY(72deg) translateZ(var(--z-dstnc));
+
+                    @media screen and (max-width: 1000px) {
+                        transform: rotateY(72deg) translateZ(500px);
+                    }
+                }
+                &:nth-child(3) {
+                    transform: rotateY(144deg) translateZ(var(--z-dstnc));
+
+                    @media screen and (max-width: 1000px) {
+                        transform: rotateY(144deg) translateZ(500px);
+                    }
+                }
+                &:nth-child(4) {
+                    transform: rotateY(216deg) translateZ(var(--z-dstnc));
+
+                    @media screen and (max-width: 1000px) {
+                        transform: rotateY(216deg) translateZ(500px);
+                    }
+                }
+                &:nth-child(5) {
+                    transform: rotateY(288deg) translateZ(var(--z-dstnc));
+
+                    @media screen and (max-width: 1000px) {
+                        transform: rotateY(288deg) translateZ(500px);
+                    }
+                }
+
+                /* planet */
+                &:is(.planet) {
+                    width: 680px;
+                    height: 680px;
+                    inset-inline-start: 50%;
+                    inset-block-start: 67%;
+                    transform: translateX(-50%) translateY(-50%);
+                    transform-style: preserve-3d;
+                    transform-box: fill-box;
+                    transform-origin: center;
+                    animation: rotation 10s infinite linear;
+
+                    @media screen and (max-width: 1000px) {
+                        width: 450px;
+                        height: 450px;
+                    }
+    
+                    /* planet wireframe */
+                    & > div {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                        border: 2px solid var(--color_prpl);
+
+                    }
+                }
+            }
+            /* 창 배경 공통 */
+            & > .window_bg {
+                border: 1px solid transparent;
+                border-image-source: url(/media/bg.svg);
+                border-image-slice: 60;
+                border-image-width: 50px;
+                
+                @media screen and (max-width: 1000px) {
+                    border-image-slice: 70;
+                }
+            }
+        }
+    }
+}
+
+@keyframes rotation {
+    to {
+        transform: translateX(-50%) translateY(-50%) rotateX(360deg) rotateY(360deg);
+    }
+}
+/* /planet,page */
+
+/********************************************
+Header
+*/
+.header-wrap {
+    padding-block: 30px 0px;
+    width: 100%;
+    max-width: 1600px;
+    margin-inline: auto;
+
+    transition: opacity 1s ease;
+}
+
+#logo {
+    @media screen and (max-width: 1000px) {
+        width: 100px;
+        height: 50px;
+    }
+}
+
+.scrl_gd {
+    color: grey;
+    font-family: var(--museo);
+    position: absolute;
+    inset-inline-end: 42%;
+    inset-block-end: 5%;
+    margin-block: 1rem;
+
+    & > p {
+        margin-block: 0;
+        
+        & > img {
+            width: 30px;
+            height: 10px;
+        }
+    }
+}
+
+.scrl_gd {
+    @media screen and (max-width: 1000px) {
+        display: none;
+    }
+}
+
+.header {
+    display: flex;
+    
+    @media screen and (max-width: 1000px) {
+        text-align: center;
+        flex-direction: column;
+    }
+
+    & > nav {
+        position: absolute;
+        inset-block-end: 5%;
+        
+        @media screen and (max-width: 1000px) {
+            position: unset;
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+        }
+    }
+
+    & > nav > menu {
+        position: relative;
+        align-items: center;
+        padding-inline: 0px;
+
+        @media screen and (max-width: 1000px) {
+            display: flex;
+        }
+    }
+
+    & > nav > menu > li {
+        font-family: var(--museo);
+        color: white;
+        list-style-type: none;
+        padding-inline: 20px;
+        cursor: pointer;
+        filter: drop-shadow(0px 0px 1px white);
+        
+        @media screen and (max-width: 1000px) {
+            padding-inline: 10px;
+        }
+    }
+    & > nav > menu >li:hover {
+        background-color: var(--color_prpl);
+        color: white;
+        filter: none;
+    }
+}
+
+/* intro 제어 */
+.main-wrap, .header-wrap {
+    opacity: 0;
+}
+
+/********************************************
+begin(맨 처음 화면 스타일링)
+*/
+#intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: left 0.8s ease-in-out, right 0.8s ease-in-out;
+}
+
+.begin {
+
+    & > .begin_title_wrap{
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        position: absolute;
+        margin-block-end: 150px;
+        z-index: 101;
+        pointer-events: none;
+        inset: 0;
+
+        @media screen and (max-width: 1000px) {
+            align-items: center;
+            justify-content: end;
+        }
+    }
+
+    & h1 {
+        color: var(--color_prpl);
+        font-family: var(--museo);
+        font-size: 5rem;
+        margin: 0 0 0 150px;
+        filter: drop-shadow(0px 0px 1.5px var(--color_prpl));
+
+        animation-name: float_title;
+        animation-duration: 7s;
+        animation-timing-function: cubic-bezier(0.5, 0.13, 0.63, 0.88);
+        animation-iteration-count: infinite;
+
+        @media screen and (max-width: 1000px) {
+            margin: 0;
+        }
+    }
+    
+    & .begin_subtitle {
+        font-family: var(--suse);
+        color: white;
+        font-size: 2rem;
+        margin: 0 0 0 150px;
+        filter: drop-shadow(0px 0px 1.5px white);
+
+        animation-name: float_title;
+        animation-duration: 6s;
+        animation-timing-function: cubic-bezier(0.5, 0.13, 0.63, 0.88);
+        animation-iteration-count: infinite;
+
+        @media screen and (max-width: 1000px) {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+    }
+
+    & .begin_click_gd {
+        font-family: var(--museo);
+        font-size: 1rem;
+        color: grey;
+        margin: 0;
+        text-align: center;
+
+        animation-name: float_title;
+        animation-duration: 5s;
+        animation-timing-function: cubic-bezier(0.5, 0.13, 0.63, 0.88);
+        animation-iteration-count: infinite;
+
+        & > img {
+            width: 25px;
+            height: 25px;
+        }
+    }
+}
+@keyframes float_title {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.planet_wrap {
+    display: block;
+    position: absolute;
+    width: 550px;
+    height: 550px;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    cursor: pointer;
+    z-index: 100;
+    pointer-events: auto;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+
+    @media screen and (max-width: 1000px) {
+        width: 300px;
+        height: 300px;
+        top: 300px;
+    }
+}
+
+.begin_planet {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.begin_planet_wire {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0.4px;
+    top: 1.6px;
+    pointer-events: none;
+}
+
+.planet_wrap:hover .begin_planet_wire {
+    animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/********************************************
+profile
+*/
+.profile {
+    & .profile_title {
+    border: 1px solid white;
+    border-radius: 15px;
+    font-family: var(--museo);
+    font-size: 5rem;
+    line-height: 1;
+    margin: 0;
+    padding-inline: 10px 250px;
+    color: white;
+
+        @media screen and (max-width: 1000px) {
+            font-size: 2rem;
+            padding: 10px;
+        }
+    }
+}
+
+.profile_ttl_objt_wrap {
+    display: flex;
+    justify-content: space-between;
+    margin-block-end: 15px;
+
+    @media screen and (max-width: 1000px) {
+        margin-block-end: 15px;
+    }
+}
+
+.profile_objt_wire {
+    width: 5.5rem;
+
+    @media screen and (max-width: 1000px) {
+        width: 50px;
+        padding-inline-start: 5px;
+        align-self: center;
+    }
+}
+
+.profile_objt_arrow_wrap {
+    display: flex;
+    justify-content: end;
+    margin-block: 10px;
+}
+
+.profile_contents {
+    @media screen and (max-width: 1000px) {
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+}
+
+#profile_objt_arrow {
+    @media screen and (max-width: 1000px) {
+        width: 80px;
+        height: 20px;
+    }
+}
+
+.profile_inner_contents {
+    display: flex;
+    margin-inline: auto;
+    flex-direction: column;
+    border: 1px solid white;
+    border-radius: 15px;
+    padding: 15px;
+
+    & > .profile_row1 {
+        padding-inline: 15px 0;
+        border-block-end: solid 1px white;    
+        /* name */
+        & > p:nth-child(1) {
+            color: white;
+            font-family: var(--museo);
+            font-size: 0.8rem;
+            margin-block: 0 10px;
+        }
+        /* name content */
+        & > p:nth-child(2) {
+            color: white;
+            font-family: var(--suse);
+            font-size: 1.7rem;
+            margin: 0;
+            padding-inline-start: 15px;
+        }
+    }
+    & > .profile_row2 {
+        display: flex;
+
+        @media screen and (max-width: 1000px) {
+            display: block;
+        }
+        & > .profile_row2-1 {
+            padding-inline: 15px 15px;
+            width: calc(100% / 2);
+
+            @media screen and (max-width: 1000px) {
+                border-block-end: solid 1px white;
+                width: 100%;
+        }
+            /* birthday */
+            & > p:nth-child(1) {
+                color: white;
+                font-family: var(--museo);
+                font-size: 0.8rem;
+                margin-block: 0 10px;
+            }
+            /* birthday content */
+            & > p:nth-child(2) {
+                color: white;
+                font-family: var(--suse);
+                font-size: 1.7rem;
+                margin-block: 0;
+                padding-inline-start: 15px;
+            }
+        }
+        & > .profile_row2-2 {
+            padding-inline-start: 15px;
+            border-inline-start: 1px solid white;
+
+            @media screen and (max-width: 1000px) {
+                border-inline-start: 0px;
+            }
+            /* residense */
+            & > p:nth-child(1) {
+                color: white;
+                font-family: var(--museo);
+                font-size: 0.8rem;
+                margin-block: 0 10px;
+            }
+            /* residense content */
+            & > p:nth-child(2) {
+                color: white;
+                font-family: var(--suse);
+                font-size: 1.7rem;
+                margin-block: 0;
+                padding-inline-start: 15px;
+            }
+        }
+    }
+    & > .profile_introduce {
+        border-block-start: 1px solid white;
+
+        & > ul{
+            padding-inline-start: 23px;
+            margin-block: 10px 0;
+
+            & > li {
+            color: white;
+            font-family: var(--nanum);
+            margin: 0;
+            line-height: 2rem;
+            }
+        }
+    }
+}
+
+/********************************************
+skills
+*/
+.skills_ttl_objt_wrap {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid white;
+    border-radius: 15px;
+    margin-block-end: 15px;
+}
+
+.skills_title {
+    color: white;
+    font-family: var(--museo);
+    font-size: 5rem;
+    line-height: 1;
+    margin: 0;
+    padding-inline-start: 10px;
+
+    @media screen and (max-width: 1000px) {
+        font-size: 2rem;
+        margin-block: 0;
+        padding: 10px;
+    }
+}
+
+.skills_objt {
+    max-width: 90px;
+    padding-inline-end: 10px;
+
+    @media screen and (max-width: 1000px) {
+        max-width: 45px;
+    }
+}
+
+.skills_contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    padding: 15px 50px;
+
+    border: 4px solid transparent;
+    border-image-source: url(/media/skills_bg3.svg);
+    border-image-slice: 50;
+    border-image-width: 50px;
+
+    @media screen and (max-width: 1000px) {
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        display: block;
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+    
+    & > .skills_row1 {
+        display: flex;
+        gap: 15px;
+        border-radius: 15px 15px 0 0;
+        padding: 30px 20px 20px 20px;
+        background-color: rgb(255 255 255 / 0.7);
+
+        @media screen and (max-width: 1000px) {
+            display: block;
+            border: none;
+            padding: 15px 15px 7px 15px;
+        }
+    }
+    & > .skills_row2 {
+        display: flex;
+        gap: 15px;
+        border-radius: 0 0 15px 15px;
+        padding: 20px 20px 30px 20px;
+        background-color: rgb(255 255 255 / 0.7);
+
+        @media screen and (max-width: 1000px) {
+            display: block;
+            border: none;
+            padding: 0 15px 15px 15px;
+        }
+    }
+}
+
+.skills_ic_pct {
+    display: flex;
+    gap: 10px;
+
+    & > section > p {
+        margin: 0;
+        font-size: 0.7rem;
+        color: white;
+        line-height: 1;
+        text-align: end;
+    }
+}
+
+.skills_pct_wrap {
+    align-self: center;
+}
+
+.skills_icons {
+    display: flex;
+
+    & > svg {
+        background-image: url(/media/skills_icon_bg.svg);
+        background-repeat: no-repeat;
+        padding: 17px;
+    }
+}
+
+/********************************************
+works
+*/
+.works_ttl_objt_wrap {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 15px;
+    padding-inline-start: 10px;
+}
+
+.works_title {
+    color: white;
+    font-family: var(--museo);
+    font-size: 5rem;
+    line-height: 1;
+    margin-block: 0;
+
+    @media screen and (max-width: 1000px) {
+        font-size: 2rem;
+        padding-block-end: 5px;
+        margin-block-start: 10px;
+    }
+}
+
+.works_objt {
+    max-width: 70px;
+    padding-inline-end: 10px;
+
+    @media screen and (max-width: 1000px) {
+        max-width: 35px;
+    }
+}
+
+.works_title_border {
+    color: rgb(0 0 0 / 0);
+    border: 1px solid white;
+    border-radius: 15px;
+    margin-block: 0 15px;
+    font-size: 0.5rem;
+
+    @media screen and (max-width: 1000px) {
+        font-size: 0.5rem;
+    }
+}
+
+.works_contents_wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 300px);
+    grid-auto-rows: 220px;
+    gap: 20px;
+    justify-content: center;
+    height: 300px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    border-radius: 15px;
+
+    @media screen and (max-width: 1000px) {
+        height: 100%;
+        grid-template-columns: auto;
+        padding-inline: 30px;
+    }
+
+    & > div {
+        border: 1px solid transparent;
+        border-image-source: url(/media/works_bg2.svg);
+        border-image-slice: 50;
+        border-image-width: 50px;
+        padding: 30px;
+    }
+    
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        cursor: pointer;
+    }
+}
+
+/********************************************
+contact
+*/
+.contact_ttl_objt_wrap {
+    display: flex;
+    justify-content: space-between;
+    border-block-end: 3.5px solid white;
+    margin-block-end: 15px;
+}
+
+.contact_title {
+    color: white;
+    font-family: var(--museo);
+    font-size: 5rem;
+    line-height: 1;
+    margin-block: 0;
+    padding-inline: 10px;
+    
+    @media screen and (max-width: 1000px) {
+        font-size: 2rem;
+        margin-block: 0;
+        padding: 10px;
+    }
+}
+
+.contact_objt {
+    width: 160px;
+    padding-inline-end: 15px;
+    align-self: self-end;
+    padding-block-end: 10px;
+    @media screen and (max-width: 1000px) {
+        width: 80px;
+        padding: 15px 10px;
+    }
+}
+
+.contact > form {
+    display: flex;
+    justify-content: center;
+    column-gap: 15px;
+    overflow-y: hidden;
+    
+    @media screen and (max-width: 1000px) {
+        display: block;
+        overflow-y: auto;
+        scrollbar-width: thin;
+
+    }
+
+    & > div label {
+        color: white;
+        font-family: var(--suse);
+        font-size: 0.8rem;
+        display: block;
+    }
+
+    & input {
+        color: white;
+        background-color: black;
+        border-style: none;
+        border-block-end: white 1px solid;
+        font-family: var(--suse), var(--nanum);
+        font-size: 1rem;
+        width: 100%;
+        margin-block-end: 10px;
+    }
+
+    & textarea {
+        font-family: var(--suse), var(--nanum);
+        background-color: black;
+        color: white;
+        border: white solid 1px;
+        width: 100%;
+        font-size: 1rem;
+    }
+}
+
+.contact_col1 {
+    width: 100%;
+    padding: 0 15px;
+    border: 15px solid transparent;
+    border-image-source: url(/media/contact_bg_m.svg);
+    border-image-slice: 40;
+    border-image-width: 50px;
+    
+    @media screen and (max-width: 1000px) {
+        width: auto;
+        margin-block-end: 15px;
+    }
+}
+
+.contact_col2 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 15px 15px 0 15px;
+    justify-content: space-between;
+    border: 15px solid transparent;
+    border-image-source: url(/media/contact_bg_p.svg);
+    border-image-slice: 40;
+    border-image-width: 50px;
+
+    @media screen and (max-width: 1000px) {
+        width: auto;
+        height: 90%;
+        margin-block-end: 15px;
+    }
+}
+
+.contact_col3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    width: 100%;
+    font-family: var(--suse);
+    color: white;
+    padding: 0 15px;
+    border: 15px solid transparent;
+    border-image-source: url(/media/contact_bg_m.svg);
+    border-image-slice: 40;
+    border-image-width: 50px;
+
+    & > p {
+        margin: 0;
+    }
+
+    @media screen and (max-width: 1000px) {
+        width: auto;
+        height: 90%;
+    }
+}
+
+#captcha {
+    width: 12.5rem;
+    @media screen and (max-width: 1000px) {
+        width: 9.5rem
+    }
+}
+
+.button_cpch_fld {
+    background-color: white;
+    font-family: var(--suse);
+    border-style: none;
+    color: black;
+    padding: 5px 10px;
+    margin-block-start: 10px;
+    cursor: pointer;
+}
+
+.button_refsh {
+    background-color: white;
+    font-family: var(--nanum);
+    border-style: none;
+    border-radius: 5px;
+    color: black;
+    padding: 5px 10px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.button_sbmt {
+    display: flex;
+    color: black;
+    font-family: var(--museo);
+    font-size: 2rem;
+    text-align: left;
+    border-style: none;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 2.5rem;
+    background-color: white;
+    margin-block-start: 10px;
+    cursor: pointer;
+}
+
+#contact_sbmt_objt {
+    transform: rotateY(180deg);
+
+    @media screen and (max-width: 1000px) {
+        display: none;
+    }
+}
+
+#content_dialog {
+    background-color: rgb(0 0 0 / 0.8);
+    border: 1px solid white;
+    border-radius: 15px;
+    color: white;
+}
+
+#content_dialog_close {
+    display: flex;
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 6px;
+    color: white;
+    padding: 6px 10px;
+    font-size: 1rem;
+    justify-self: end;
+}
+
+#dialog_content {
+    padding: 20px;
+
+    & > h1 {
+    font-size: 1rem;
+    }
+}
+
+/***************
+* 비활성 창 블러 *
+***************/
+.filter_blur {
+    filter: blur(6px);
+}
